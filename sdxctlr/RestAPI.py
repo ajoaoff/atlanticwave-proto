@@ -1449,6 +1449,7 @@ class RestAPI(SingletonMixin):
 
         # Extract out data. Try JSON first.
         data = request.get_json()
+        print data
         if data == None:
             # Not JSON, so from the HTML form:
             preprocessed_data = {policytype:(flask.request.form.to_dict())}
