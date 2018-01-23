@@ -1462,9 +1462,13 @@ class RestAPI(SingletonMixin):
         # Get UserPolicy
         try:
             policyclass = RuleRegistry.instance().get_rule_class(policytype)
+            print 'Checkpoint 1'
             policyclass.check_syntax(data)
+            print 'Checkpoint 2'
             policy = policyclass(userid, data)
+            print 'Checkpoint 3'
             hash = RuleManager.instance().add_rule(policy)
+            print 'Checkpoint 4'
             policy_url = base_url + str(hash)
             retdict['policy']['href'] = policy_url
             #FIXME - proper response
