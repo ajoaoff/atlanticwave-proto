@@ -65,39 +65,54 @@ class L2TunnelPolicy(UserPolicy):
             # Make sure the times are the right format
             # https://stackoverflow.com/questions/455580/json-datetime-between-python-and-javascript
             jsonstring = cls.get_policy_name()
+            print 'Checkpoint 1.1'
             starttime = datetime.strptime(json_rule[jsonstring]['starttime'],
                                          rfc3339format)
+            print 'Checkpoint 1.2'
             endtime = datetime.strptime(json_rule[jsonstring]['endtime'],
                                          rfc3339format)
+            print 'Checkpoint 1.3'
             src_switch = json_rule[jsonstring]['srcswitch']
+            print 'Checkpoint 1.4'
             dst_switch = json_rule[jsonstring]['dstswitch']
+            print 'Checkpoint 1.5'
             src_port = int(json_rule[jsonstring]['srcport'])
+            print 'Checkpoint 1.6'
             dst_port = int(json_rule[jsonstring]['dstport'])
+            print 'Checkpoint 1.7'
             src_vlan = int(json_rule[jsonstring]['srcvlan'])
+            print 'Checkpoint 1.8'
             dst_vlan = int(json_rule[jsonstring]['dstvlan'])
+            print 'Checkpoint 1.9'
             bandwidth = int(json_rule[jsonstring]['bandwidth'])
+            print 'Checkpoint 1.10'
 
             delta = endtime - starttime
+            print 'Checkpoint 1.11'
             if delta.total_seconds() < 0:
                 raise UserPolicyValueError("Time ends before it begins: begin %s, end %s" % (starttime, endtime))
-
+            print 'Checkpoint 1.12'
             if ((src_port < 0) or
                 (src_port > 24)):
                 raise UserPolicyValueError("src_port is out of range %d" %
                                            src_port)
+            print 'Checkpoint 1.13'
             if ((dst_port < 0) or
                 (dst_port > 24)):
                 raise UserPolicyValueError("dst_port is out of range %d" %
                                            dst_port)
+            print 'Checkpoint 1.14'
             if ((src_vlan < 0) or
                 (src_vlan > 4090)):
                 raise UserPolicyValueError("src_vlan is out of range %d" %
                                            src_vlan)
+            print 'Checkpoint 1.15'
             if ((dst_vlan < 0) or
                 (dst_vlan > 4090)):
                 raise UserPolicyValueError("dst_vlan is out of range %d" %
                                            dst_vlan)
-
+            print 'Checkpoint 1.16'
+            
         except e:
             raise
             
